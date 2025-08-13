@@ -75,6 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
             alert("Please enter a search term.");
             return;
         }
+
         const requestOptions = {
             method: 'GET',
             headers: {
@@ -82,30 +83,21 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         };
         const endURL = `recipes?term=${encodeURIComponent(term)}`;
-        const getRecipeSearchRequest = new Request(`${BASE_URL}/${endURL}`, requestOptions);
+        const getRecipeRequest = new Request(`${BASE_URL}/${endURL}`, requestOptions);
 
         try {
-            const response = await fetch(getRecipeSearchRequest);
+            const response = await fetch(getRecipeRequest);
 
-            // Check if the request was successful
             if (response.ok) {
-                recipeList = [];
                 recipeList = await response.json();
-                setTimeout(() => {
-                    refreshRecipeList();
-                }, 750);
-
+                refreshRecipeList();
             } else {
-                // If the response is not successful
                 console.error('Error fetching data:', response.status, response.statusText);
                 alert("Error searching recipes");
-                return;
             }
         } catch (error) {
-            // Handle network or other errors
             console.error('Error:', error);
             alert("Error searching recipes");
-            return;
         }
     }
 
