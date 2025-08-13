@@ -67,28 +67,34 @@ window.addEventListener("DOMContentLoaded", () => {
      * - Update the recipe list using refreshRecipeList()
      * - Handle fetch errors and alert user
      */
-    async function searchRecipes(term) {
+    async function searchRecipes() {
         // Implement search logic here
+        const term = document.getElementById("search-input").value.trim();
+
+        if (!term) {
+            alert("Please enter a search term.");
+            return;
+        }
         const requestOptions = {
             method: 'GET',
             headers: {
                 "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
             }
         };
-        let endURL = `recipes?term=${term}`;
-        const getRecipeRequest = new Request(`${BASE_URL}/${endURL}`, requestOptions);
+        const endURL = `recipes?term=${encodeURIComponent(term)}`;
+        const getRecipeSearchRequest = new Request(`${BASE_URL}/${endURL}`, requestOptions);
 
         try {
-            const response = await fetch(getRecipeRequest);
+            const response = await fetch(getRecipeSearchRequest);
 
             // Check if the request was successful
             if (response.ok) {
                 recipeList = [];
                 recipeList = await response.json();
                 setTimeout(() => {
-                     refreshRecipeList();
+                    refreshRecipeList();
                 }, 750);
-               
+
             } else {
                 // If the response is not successful
                 console.error('Error fetching data:', response.status, response.statusText);
