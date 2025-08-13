@@ -164,10 +164,12 @@ async function deleteIngredient() {
     };
 
     let item = ingredients.find(i => i.name.toLowerCase() === ingredient.toLowerCase());
+      console.log(item);
     if (!item?.id) {
         alert("There is no ingredient by that name");
         return;
     }
+  
     let id = item.id;
 
     // create request 
