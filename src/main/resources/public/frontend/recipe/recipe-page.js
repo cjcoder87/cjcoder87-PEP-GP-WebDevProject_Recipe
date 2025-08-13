@@ -94,7 +94,7 @@ window.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             // Handle network or other errors
             console.error('Error:', error);
-            alert("Error searching recipes: " + err.message);
+            alert("Error searching recipes: ");
             return;
         }
     }
