@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
             }
         };
-        let endURL = `recipes?name=${encodeURIComponent(term)}`;
+        let endURL = `recipes?term=${encodeURIComponent(term)}`;
         const getRecipeRequest = new Request(`${BASE_URL}/${endURL}`, requestOptions);
 
         try {
@@ -88,7 +88,7 @@ window.addEventListener("DOMContentLoaded", () => {
             } else {
                 // If the response is not successful
                 console.error('Error fetching data:', response.status, response.statusText);
-                alert("Error searching recipes: " + err.message);
+                alert("Error searching recipes");
                 return;
             }
         } catch (error) {
@@ -215,6 +215,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function refreshRecipeList() {
         // Implement refresh logic here
+        recipeList = [];
         recipeContainer.innerHTML = "";
         for (let index = 0; index < recipeList.length; index++) {
             const recipe = recipeList[index].name + recipeList[index].instructions;
