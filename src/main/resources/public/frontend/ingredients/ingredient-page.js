@@ -62,7 +62,6 @@ async function addIngredient() {
         headers: {
             "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
         },
-        "Content-Type": "application/json",
         body: JSON.stringify({ name: ingredient })
     };
 
@@ -179,7 +178,7 @@ async function deleteIngredient() {
         const response = await fetch(deleteIngredientRequest);
 
         // Check if the request was successful
-        if (response.ok) {
+        if (response.status === 200) {
             // If the response is successful (status code 200)
             //   const data = await response.json(); // Parse the response body as JSON
             //   console.log('Fetched data:', data);
