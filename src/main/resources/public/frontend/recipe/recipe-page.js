@@ -83,6 +83,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             // Check if the request was successful
             if (response.ok) {
+                recipeList = [];
                 recipeList = await response.json();
                 refreshRecipeList();
             } else {
