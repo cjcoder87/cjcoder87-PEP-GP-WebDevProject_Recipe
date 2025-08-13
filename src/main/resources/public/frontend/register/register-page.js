@@ -14,7 +14,6 @@ let passwordInput = document.getElementById("password-input");
 let repeatPasswordInput = document.getElementById("repeat-password-input");
 let registerButton = document.getElementById("register-button");
 
-
 /* 
  * TODO: Ensure the register button calls processRegistration when clicked
  */
