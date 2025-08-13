@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
             }
         };
-        let endURL = `recipes?term=${encodeURIComponent(term)}`;
+        let endURL = `recipes?term=${term}`;
         const getRecipeRequest = new Request(`${BASE_URL}/${endURL}`, requestOptions);
 
         try {
@@ -113,7 +113,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function addRecipe() {
         // Implement add logic here
-        return;
+        return null;
     }
 
     /**
@@ -126,7 +126,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function updateRecipe() {
         // Implement update logic here
-        return;
+        return null;
     }
 
     /**
