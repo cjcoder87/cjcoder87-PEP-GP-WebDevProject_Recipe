@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", () => {
     /*
      * TODO: Show admin link if is-admin flag in sessionStorage is "true"
      */
-    if (sessionStorage.getItem("is-admin")) {
+    if (sessionStorage.getItem("is-admin") === "true") {
         adminLink.style.display = "inline";
     }
     /*
