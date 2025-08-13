@@ -74,7 +74,7 @@ async function addIngredient() {
         const response = await fetch(addIngredientRequest);
 
         // Check if the request was successful
-        if (response.status === 200) {
+        if (response.ok) {
             // If the response is successful (status code 200)
             addIngredientNameInput.value = "";
             getIngredients();
@@ -181,7 +181,7 @@ async function deleteIngredient() {
         const response = await fetch(deleteIngredientRequest);
 
         // Check if the request was successful
-        if (response.status === 200) {
+        if (response.ok) {
             // If the response is successful (status code 200)
             deleteIngredientNameInput.value = "";
             getIngredients();
