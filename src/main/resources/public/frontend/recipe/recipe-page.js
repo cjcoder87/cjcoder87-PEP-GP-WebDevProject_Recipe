@@ -69,6 +69,22 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function searchRecipes(term) {
         // Implement search logic here
+         try {
+        const token = sessionStorage.getItem("auth-token");
+        const response = await fetch(`/recipes?name=${encodeURIComponent(term)}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error(`Search failed: ${response.status}`);
+
+        recipeList = await response.json();
+        refreshRecipeList();
+    } catch (err) {
+        alert("Error searching recipes: " + err.message);
+    }
     }
 
     /**
