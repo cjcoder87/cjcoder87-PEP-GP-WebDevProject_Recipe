@@ -24,6 +24,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let updateButton = document.getElementById("update-recipe-submit-input");
     let searchButton = document.getElementById("search-button");
     let addButton = document.getElementById("add-recipe-submit-input");
+
+    let recipeList = [];
     /*
      * TODO: Show logout button if auth-token exists in sessionStorage
      */
