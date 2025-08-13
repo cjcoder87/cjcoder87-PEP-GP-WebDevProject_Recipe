@@ -162,7 +162,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(getRecipeRequest);
 
             // Check if the request was successful
-            if (response.ok) {
+            if (response.status === 200) {
                 recipeList = await response.json();
                 refreshRecipeList();
             } else {
@@ -219,7 +219,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(logoutRequest);
 
             // Check if the request was successful
-            if (response.ok) {
+            if (response.status === 200) {
                 sessionStorage.clear();
                 window.location.href = "../login/login-page.html";
             } else {
