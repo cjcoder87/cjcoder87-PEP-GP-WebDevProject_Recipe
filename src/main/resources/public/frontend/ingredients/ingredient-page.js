@@ -119,7 +119,7 @@ async function getIngredients() {
 
         // Check if the request was successful
         if (response.ok) {
-            ingredientList = await response.json();
+            ingredients = await response.json();
             refreshIngredientList();
         } else {
             // If the response is not successful
@@ -163,7 +163,7 @@ async function deleteIngredient() {
         }
     };
 
-    let item = ingredientList.find(i => i.name.toLowerCase() === ingredient.toLowerCase());
+    let item = ingredients.find(i => i.name.toLowerCase() === ingredient.toLowerCase());
     if (!item) {
         alert("There is no ingredient by that name");
         return;
