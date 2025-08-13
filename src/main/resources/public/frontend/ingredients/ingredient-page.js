@@ -167,6 +167,7 @@ async function deleteIngredient() {
         alert("There is no ingredient by that name");
         return;
     }
+    console.log("item " + item);
     let id = item.id;
 
     // create request 

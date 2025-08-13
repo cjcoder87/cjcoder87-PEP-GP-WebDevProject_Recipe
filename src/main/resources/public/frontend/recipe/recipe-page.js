@@ -17,9 +17,13 @@ window.addEventListener("DOMContentLoaded", () => {
      * - Search input
     */
     let adminLink = document.getElementById("admin-link");
-    let logoutButton = document.getElementById("logout-button");
-    let searchInput = document.getElementById("search-input");
     let recipeContainer = document.getElementById("recipe-list");
+
+    let logoutButton = document.getElementById("logout-button");
+    let deleteButton = document.getElementById("delete-recipe-submit-input");
+    let updateButton = document.getElementById("update-recipe-submit-input");
+    let searchButton = document.getElementById("search-button");
+    let addButton = document.getElementById("add-recipe-submit-input");
     /*
      * TODO: Show logout button if auth-token exists in sessionStorage
      */
@@ -40,6 +44,11 @@ window.addEventListener("DOMContentLoaded", () => {
      * - Search button → searchRecipes()
      * - Logout button → processLogout()
      */
+    addButton.onclick = addRecipe;
+    updateButton.onclick = updateRecipe;
+    deleteButton.onclick = deleteRecipe;
+    searchButton.onclick = searchRecipes;
+    logoutButton.onclick = processLogout;
 
     /*
      * TODO: On page load, call getRecipes() to populate the list
@@ -56,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
      * - Update the recipe list using refreshRecipeList()
      * - Handle fetch errors and alert user
      */
-    async function searchRecipes() {
+    async function searchRecipes(term) {
         // Implement search logic here
     }
 
@@ -113,6 +122,13 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function refreshRecipeList() {
         // Implement refresh logic here
+        recipeContainer.innerHTML = "";
+        for (let index = 0; index < recipeList.length; index++) {
+            const recipe = recipeList[index].name + recipeList[index].instructions;
+            let li = document.createElement('li');
+            li.innerHTML = recipe;
+            recipeContainer.appendChild(li);
+        }
     }
 
     /**
