@@ -77,7 +77,7 @@ async function addIngredient() {
         if (response.ok) {
             // If the response is successful (status code 200)
             addIngredientNameInput.value = "";
-            await getIngredients();
+            getIngredients();
         } else {
             // If the response is not successful
             console.error('Error fetching data:', response.status, response.statusText);
@@ -162,7 +162,7 @@ async function deleteIngredient() {
             "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
         }
     };
-    console.log("ingredients " + ingredients);
+
     let item = ingredients.find(i => i.name.toLowerCase() === ingredient.toLowerCase());
     if (!item) {
         alert("There is no ingredient by that name");
@@ -184,7 +184,7 @@ async function deleteIngredient() {
             //   const data = await response.json(); // Parse the response body as JSON
             //   console.log('Fetched data:', data);
             deleteIngredientNameInput.value = "";
-            await getIngredients();
+            getIngredients();
         } else {
             // If the response is not successful
             console.error('Error fetching data:', response.status, response.statusText);
