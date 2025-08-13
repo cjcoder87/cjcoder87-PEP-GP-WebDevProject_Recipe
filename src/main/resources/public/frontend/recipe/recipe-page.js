@@ -147,22 +147,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function getRecipes() {
         // Implement get logic here
-        try {
-            const token = sessionStorage.getItem("auth-token");
-            const response = await fetch("/recipes", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            if (!response.ok) throw new Error(`Get recipes failed: ${response.status}`);
-
-            recipeList = await response.json();
-            refreshRecipeList();
-        } catch (err) {
-            alert("Error fetching recipes: " + err.message);
-        }
     }
 
     /**
