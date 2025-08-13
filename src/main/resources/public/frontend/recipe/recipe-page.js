@@ -69,22 +69,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function searchRecipes(term) {
         // Implement search logic here
-        try {
-            const token = sessionStorage.getItem("auth-token");
-            const response = await fetch(`/recipes?name=${encodeURIComponent(term)}`, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            if (!response.ok) throw new Error(`Search failed: ${response.status}`);
-
-            recipeList = await response.json();
-            refreshRecipeList();
-        } catch (err) {
-            alert("Error searching recipes: " + err.message);
-        }
     }
 
     /**
@@ -97,34 +81,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function addRecipe() {
         // Implement add logic here
-        const name = document.getElementById("add-recipe-name").value.trim();
-        const instructions = document.getElementById("add-recipe-instructions").value.trim();
-
-        if (!name || !instructions) {
-            alert("Please enter both a recipe name and instructions.");
-            return;
-        }
-
-        try {
-            const token = sessionStorage.getItem("auth-token");
-            const response = await fetch("/recipes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({ name, instructions })
-            });
-
-            if (!response.ok) throw new Error(`Add failed: ${response.status}`);
-
-            document.getElementById("add-recipe-name").value = "";
-            document.getElementById("add-recipe-instructions").value = "";
-
-            await getRecipes();
-        } catch (err) {
-            alert("Error adding recipe: " + err.message);
-        }
     }
 
     /**
@@ -137,42 +93,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function updateRecipe() {
         // Implement update logic here
-         const name = document.getElementById("update-recipe-name").value.trim();
-    const instructions = document.getElementById("update-recipe-instructions").value.trim();
-
-    if (!name || !instructions) {
-        alert("Please enter both a recipe name and updated instructions.");
-        return;
-    }
-
-    try {
-        const token = sessionStorage.getItem("auth-token");
-
-        // Find the recipe by name
-        const existing = recipeList.find(r => r.name.toLowerCase() === name.toLowerCase());
-        if (!existing) {
-            alert("Recipe not found.");
-            return;
-        }
-
-        const response = await fetch(`/recipes/${existing.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({ name, instructions })
-        });
-
-        if (!response.ok) throw new Error(`Update failed: ${response.status}`);
-
-        document.getElementById("update-recipe-name").value = "";
-        document.getElementById("update-recipe-instructions").value = "";
-
-        await getRecipes();
-    } catch (err) {
-        alert("Error updating recipe: " + err.message);
-    }
     }
 
     /**
@@ -184,37 +104,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function deleteRecipe() {
         // Implement delete logic here
-         const name = document.getElementById("delete-recipe-name").value.trim();
-    if (!name) {
-        alert("Please enter a recipe name to delete.");
-        return;
-    }
-
-    try {
-        const token = sessionStorage.getItem("auth-token");
-
-        // Find the recipe by name
-        const existing = recipeList.find(r => r.name.toLowerCase() === name.toLowerCase());
-        if (!existing) {
-            alert("Recipe not found.");
-            return;
-        }
-
-        const response = await fetch(`/recipes/${existing.id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if (!response.ok) throw new Error(`Delete failed: ${response.status}`);
-
-        document.getElementById("delete-recipe-name").value = "";
-        await getRecipes();
-    } catch (err) {
-        alert("Error deleting recipe: " + err.message);
-    }
-
     }
 
     /**
@@ -225,22 +114,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function getRecipes() {
         // Implement get logic here
-           try {
-        const token = sessionStorage.getItem("auth-token");
-        const response = await fetch("/recipes", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if (!response.ok) throw new Error(`Get recipes failed: ${response.status}`);
-
-        recipeList = await response.json();
-        refreshRecipeList();
-    } catch (err) {
-        alert("Error fetching recipes: " + err.message);
-    }
     }
 
     /**
@@ -269,22 +142,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function processLogout() {
         // Implement logout logic here
-        try {
-        const token = sessionStorage.getItem("auth-token");
-        const response = await fetch("/logout", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if (!response.ok) throw new Error(`Logout failed: ${response.status}`);
-
-        sessionStorage.clear();
-        window.location.href = "../login/login.html";
-    } catch (err) {
-        alert("Error logging out: " + err.message);
-    }
     }
 
 });
