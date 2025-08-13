@@ -128,19 +128,19 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         // create request 
-        const addIngredientRequest = new Request(`${BASE_URL}/recipes`, requestOptions);
+        const addRecipeRequest = new Request(`${BASE_URL}/recipes`, requestOptions);
 
         // use request
         // let promise = fetch(addIngredientRequest);
         try {
-            const response = await fetch(addIngredientRequest);
+            const response = await fetch(addRecipeRequest);
 
             // Check if the request was successful
             if (response.ok) {
                 // If the response is successful (status code 200)
                 document.getElementById("add-recipe-name").value = "";
                 document.getElementById("add-recipe-instructions").value = "";
-                getRecipes();
+                await getRecipes();
             } else {
                 // If the response is not successful
                 console.error('Error fetching data:', response.status, response.statusText);
