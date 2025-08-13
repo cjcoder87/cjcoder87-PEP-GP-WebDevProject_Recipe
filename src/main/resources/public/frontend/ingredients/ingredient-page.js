@@ -30,7 +30,7 @@ deleteIngredientButton.onclick = deleteIngredient;
 /*
  * TODO: Create an array to keep track of ingredients
  */
-let ingredientList = [];
+let ingredients = [];
 /* 
  * TODO: On page load, call getIngredients()
  */
@@ -136,6 +136,7 @@ async function getIngredients() {
 }
 
 
+
 /**
  * TODO: Delete Ingredient Function
  * 
@@ -213,11 +214,11 @@ async function deleteIngredient() {
 function refreshIngredientList() {
     // Implement ingredient list rendering logic here
     ingredientListContainer.innerHTML = "";
-    for (let index = 0; index < ingredientList.length; index++) {
-        const ingredient = ingredientList[index].name;
+    for (let index = 0; index < ingredients.length; index++) {
+        const ingredient = ingredients[index].name;
         let li = document.createElement('li');
         let p = document.createElement('p');
-        p.innerHTML = ingredient;
+        p.innerText = ingredient;
         li.appendChild(p);
         ingredientListContainer.appendChild(li);
     }
