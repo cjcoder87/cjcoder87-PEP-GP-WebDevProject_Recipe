@@ -147,35 +147,35 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function getRecipes() {
         // Implement get logic here
-        
-    const requestOptions = {
-        method: 'GET',
-        headers: {
-            "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
-        }
-    };
 
-    const getRecipeRequest = new Request(`${BASE_URL}/recipes`, requestOptions);
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+            }
+        };
 
-    try {
-        const response = await fetch(getRecipeRequest);
+        const getRecipeRequest = new Request(`${BASE_URL}/recipes`, requestOptions);
 
-        // Check if the request was successful
-        if (response.ok) {
-            recipeList = await response.json();
-            refreshRecipeList();
-        } else {
-            // If the response is not successful
-            console.error('Error fetching data:', response.status, response.statusText);
+        try {
+            const response = await fetch(getRecipeRequest);
+
+            // Check if the request was successful
+            if (response.ok) {
+                recipeList = await response.json();
+                refreshRecipeList();
+            } else {
+                // If the response is not successful
+                console.error('Error fetching data:', response.status, response.statusText);
+                alert("Getting Recipes Failed");
+                return;
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error('Error:', error);
             alert("Getting Recipes Failed");
             return;
         }
-    } catch (error) {
-        // Handle network or other errors
-        console.error('Error:', error);
-        alert("Getting Recipes Failed");
-        return;
-    }
     }
 
     /**
@@ -204,6 +204,35 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function processLogout() {
         // Implement logout logic here
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+            }
+        };
+
+        const logoutRequest = new Request(`${BASE_URL}/logout`, requestOptions);
+
+        try {
+            const response = await fetch(logoutRequest);
+
+            // Check if the request was successful
+            if (response.ok) {
+                sessionStorage.clear();
+                window.location.href = "../login/login-page.html";
+            } else {
+                // If the response is not successful
+                console.error('Error fetching data:', response.status, response.statusText);
+                alert("LogOut Failed");
+                return;
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error('Error:', error);
+            alert("LogOut Failed");
+            return;
+        }
     }
 
 });
