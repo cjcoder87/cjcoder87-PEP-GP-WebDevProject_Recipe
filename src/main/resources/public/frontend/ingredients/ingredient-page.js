@@ -164,7 +164,7 @@ async function deleteIngredient() {
     };
 
     let item = ingredients.find(i => i.name.toLowerCase() === ingredient.toLowerCase());
-    if (!item) {
+    if (!item?.id) {
         alert("There is no ingredient by that name");
         return;
     }

@@ -81,6 +81,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function addRecipe() {
         // Implement add logic here
+        return;
     }
 
     /**
@@ -93,6 +94,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function updateRecipe() {
         // Implement update logic here
+        return;
     }
 
     /**
