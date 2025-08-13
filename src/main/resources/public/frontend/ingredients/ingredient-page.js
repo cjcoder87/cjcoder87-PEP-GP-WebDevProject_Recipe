@@ -120,7 +120,7 @@ async function getIngredients() {
         // Check if the request was successful
         if (response.ok) {
             ingredients = await response.json();
-            refreshIngredientList(ingredients);
+            refreshIngredientList();
         } else {
             // If the response is not successful
             console.error('Error fetching data:', response.status, response.statusText);
@@ -186,7 +186,7 @@ async function deleteIngredient() {
             //   const data = await response.json(); // Parse the response body as JSON
             //   console.log('Fetched data:', data);
             deleteIngredientNameInput.value = "";
-            await getIngredients();
+            getIngredients();
         } else {
             // If the response is not successful
             console.error('Error fetching data:', response.status, response.statusText);
@@ -213,7 +213,7 @@ async function deleteIngredient() {
  *   - Create <li> and inner <p> with ingredient name
  *   - Append to container
  */
-function refreshIngredientList(ingredients) {
+function refreshIngredientList() {
     // Implement ingredient list rendering logic here
     ingredientListContainer.innerHTML = "";
     for (let index = 0; index < ingredients.length; index++) {
