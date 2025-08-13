@@ -56,9 +56,9 @@ async function processRegistration() {
     }
 
     if (!username || !email || !password || !repeatedPassword) {
-    alert("Please fill in all fields.");
-    return;
-}
+        alert("Please fill in all fields.");
+        return;
+    }
 
     // Example placeholder:
     const registerBody = { username, email, password };
