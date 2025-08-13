@@ -85,7 +85,10 @@ window.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 recipeList = [];
                 recipeList = await response.json();
-                refreshRecipeList();
+                setTimeout(() => {
+                     refreshRecipeList();
+                }, 750);
+               
             } else {
                 // If the response is not successful
                 console.error('Error fetching data:', response.status, response.statusText);
