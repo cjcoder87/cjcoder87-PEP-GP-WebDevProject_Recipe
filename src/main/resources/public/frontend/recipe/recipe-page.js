@@ -147,6 +147,35 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function getRecipes() {
         // Implement get logic here
+        
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+        }
+    };
+
+    const getRecipeRequest = new Request(`${BASE_URL}/recipes`, requestOptions);
+
+    try {
+        const response = await fetch(getRecipeRequest);
+
+        // Check if the request was successful
+        if (response.ok) {
+            recipeList = await response.json();
+            refreshRecipeList();
+        } else {
+            // If the response is not successful
+            console.error('Error fetching data:', response.status, response.statusText);
+            alert("Getting Recipes Failed");
+            return;
+        }
+    } catch (error) {
+        // Handle network or other errors
+        console.error('Error:', error);
+        alert("Getting Recipes Failed");
+        return;
+    }
     }
 
     /**
@@ -161,7 +190,7 @@ window.addEventListener("DOMContentLoaded", () => {
         for (let index = 0; index < recipeList.length; index++) {
             const recipe = recipeList[index].name + recipeList[index].instructions;
             let li = document.createElement('li');
-            li.innerHTML = recipe;
+            li.innerText = recipe;
             recipeContainer.appendChild(li);
         }
     }
