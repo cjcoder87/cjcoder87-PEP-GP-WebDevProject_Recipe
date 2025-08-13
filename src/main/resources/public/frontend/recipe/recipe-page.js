@@ -110,7 +110,34 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function addRecipe() {
         // Implement add logic here
-        return null;
+        const name = document.getElementById("add-recipe-name").value.trim();
+        const instructions = document.getElementById("add-recipe-instructions").value.trim();
+
+        if (!name || !instructions) {
+            alert("Please enter both a recipe name and instructions.");
+            return;
+        }
+
+        try {
+            const token = sessionStorage.getItem("auth-token");
+            const response = await fetch("/recipes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ name, instructions })
+            });
+
+            if (!response.ok) throw new Error(`Add failed: ${response.status}`);
+
+            document.getElementById("add-recipe-name").value = "";
+            document.getElementById("add-recipe-instructions").value = "";
+
+            await getRecipes();
+        } catch (err) {
+            alert("Error adding recipe: " + err.message);
+        }
     }
 
     /**
