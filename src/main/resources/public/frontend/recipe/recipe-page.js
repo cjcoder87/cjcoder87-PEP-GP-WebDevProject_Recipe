@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
      * - Search input
     */
     let adminLink = document.getElementById("admin-link");
-    let recipeContainer = document.getElementById("recipe-list");
+    let recipeList = document.getElementById("recipe-list");
 
     let logoutButton = document.getElementById("logout-button");
     let deleteButton = document.getElementById("delete-recipe-submit-input");
@@ -25,7 +25,6 @@ window.addEventListener("DOMContentLoaded", () => {
     let searchButton = document.getElementById("search-button");
     let addButton = document.getElementById("add-recipe-submit-input");
 
-    let recipeList = [];
     /*
      * TODO: Show logout button if auth-token exists in sessionStorage
      */
@@ -89,7 +88,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(getRecipeRequest);
 
             if (response.ok) {
-                recipeList = await response.json();
+                recipes = await response.json();
                 refreshRecipeList();
             } else {
                 console.error('Error fetching data:', response.status, response.statusText);
@@ -193,7 +192,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             // Check if the request was successful
             if (response.ok) {
-                recipeList = await response.json();
+                recipes = await response.json();
                 refreshRecipeList();
             } else {
                 // If the response is not successful
@@ -217,12 +216,12 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function refreshRecipeList() {
         // Implement refresh logic here
-        recipeContainer.innerHTML = "";
-        for (let index = 0; index < recipeList.length; index++) {
-            const recipe = recipeList[index].name + recipeList[index].instructions;
+        recipeList.innerHTML = "";
+        for (let index = 0; index < recipes.length; index++) {
+            const recipe = `${recipes[index].name}: ${recipes[index].instructions}`;
             let li = document.createElement('li');
             li.innerText = recipe;
-            recipeContainer.appendChild(li);
+            recipeList.appendChild(li);
         }
     }
 
