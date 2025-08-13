@@ -110,6 +110,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function addRecipe() {
         // Implement add logic here
+
         const name = document.getElementById("add-recipe-name").value.trim();
         const instructions = document.getElementById("add-recipe-instructions").value.trim();
 
@@ -118,26 +119,40 @@ window.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+            },
+            body: JSON.stringify({ name, instructions })
+        };
+
+        // create request 
+        const addIngredientRequest = new Request(`${BASE_URL}/recipes`, requestOptions);
+
+        // use request
+        // let promise = fetch(addIngredientRequest);
         try {
-            const token = sessionStorage.getItem("auth-token");
-            const response = await fetch("/recipes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({ name, instructions })
-            });
+            const response = await fetch(addIngredientRequest);
 
-            if (!response.ok) throw new Error(`Add failed: ${response.status}`);
-
-            document.getElementById("add-recipe-name").value = "";
-            document.getElementById("add-recipe-instructions").value = "";
-
-            await getRecipes();
-        } catch (err) {
-            alert("Error adding recipe: " + err.message);
+            // Check if the request was successful
+            if (response.ok) {
+                // If the response is successful (status code 200)
+                document.getElementById("add-recipe-name").value = "";
+                document.getElementById("add-recipe-instructions").value = "";
+                getRecipes();
+            } else {
+                // If the response is not successful
+                console.error('Error fetching data:', response.status, response.statusText);
+                alert("Adding Recipes Failed");
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error('Error:', error);
+            alert("Adding Recipes Failed");
+            return;
         }
+
     }
 
     /**
