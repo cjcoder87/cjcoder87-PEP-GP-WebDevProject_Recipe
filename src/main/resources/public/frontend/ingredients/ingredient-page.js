@@ -4,6 +4,7 @@
 
 const BASE_URL = "http://localhost:8081"; // backend URL
 
+
 /* 
  * TODO: Get references to various DOM elements
  * - addIngredientNameInput
@@ -12,22 +13,31 @@ const BASE_URL = "http://localhost:8081"; // backend URL
  * - searchInput (optional for future use)
  * - adminLink (if visible conditionally)
  */
+let addIngredientNameInput = document.getElementById("add-ingredient-name-input");
+let deleteIngredientNameInput = document.getElementById("delete-ingredient-name-input");
+let ingredientListContainer = document.getElementById("ingredient-list");
+// let searchInput = document.getElementById();
+let deleteIngredientButton = document.getElementById("delete-ingredient-submit-button");
+let addIngredientButton = document.getElementById("add-ingredient-submit-button");
 
 /* 
  * TODO: Attach 'onclick' events to:
  * - "add-ingredient-submit-button" → addIngredient()
  * - "delete-ingredient-submit-button" → deleteIngredient()
  */
-
+addIngredientButton.onclick = addIngredient;
+deleteIngredientButton.onclick = deleteIngredient;
 /*
  * TODO: Create an array to keep track of ingredients
  */
-
+let ingredientList = [];
 /* 
  * TODO: On page load, call getIngredients()
  */
 
-
+window.onload = function () {
+    getIngredients();
+};
 /**
  * TODO: Add Ingredient Function
  * 
@@ -41,6 +51,46 @@ const BASE_URL = "http://localhost:8081"; // backend URL
  */
 async function addIngredient() {
     // Implement add ingredient logic here
+    let ingredient = addIngredientNameInput.value.trim();
+    if (ingredient === "") {
+        alert("The ingredient is empty");
+        return;
+    }
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+        },
+        "Content-Type": "application/json",
+        body: JSON.stringify({ name: ingredient })
+    };
+
+    // create request 
+    const addIngredientRequest = new Request(`${BASE_URL}/ingredients`, requestOptions);
+
+    // use request
+    // let promise = fetch(addIngredientRequest);
+    try {
+        const response = await fetch(addIngredientRequest);
+
+        // Check if the request was successful
+        if (response.ok) {
+            // If the response is successful (status code 200)
+            addIngredientNameInput.value = "";
+            getIngredients();
+        } else {
+            // If the response is not successful
+            console.error('Error fetching data:', response.status, response.statusText);
+            alert("Adding Ingredient Failed");
+        }
+    } catch (error) {
+        // Handle network or other errors
+        console.error('Error:', error);
+        alert("Adding Ingredient Failed");
+        return;
+    }
+
 }
 
 
@@ -55,6 +105,35 @@ async function addIngredient() {
  */
 async function getIngredients() {
     // Implement get ingredients logic here
+
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+        }
+    };
+
+    const getIngredientRequest = new Request(`${BASE_URL}/ingredients`, requestOptions);
+
+    try {
+        const response = await fetch(getIngredientRequest);
+
+        // Check if the request was successful
+        if (response.ok) {
+            ingredientList = await response.json();
+            refreshIngredientList();
+        } else {
+            // If the response is not successful
+            console.error('Error fetching data:', response.status, response.statusText);
+            alert("Getting Ingredient Failed");
+            return;
+        }
+    } catch (error) {
+        // Handle network or other errors
+        console.error('Error:', error);
+        alert("Getting Ingredient Failed");
+        return;
+    }
 }
 
 
@@ -70,7 +149,55 @@ async function getIngredients() {
  * - On failure or not found: alert the user
  */
 async function deleteIngredient() {
-    // Implement delete ingredient logic here
+    // Implement add ingredient logic here
+    let ingredient = deleteIngredientNameInput.value.trim();
+    if (ingredient === "") {
+        alert("The ingredient is empty");
+        return;
+    }
+
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+        }
+    };
+
+    let item = ingredientList.find(i => i.name.toLowerCase() === ingredient.toLowerCase());
+    if (!item) {
+        alert("There is no ingredient by that name");
+        return;
+    }
+    let id = item.id;
+
+    // create request 
+    const deleteIngredientRequest = new Request(`${BASE_URL}/ingredients/${id}`, requestOptions);
+
+    // use request
+    // let promise = fetch(addIngredientRequest);
+    try {
+        const response = await fetch(deleteIngredientRequest);
+
+        // Check if the request was successful
+        if (response.ok) {
+            // If the response is successful (status code 200)
+            //   const data = await response.json(); // Parse the response body as JSON
+            //   console.log('Fetched data:', data);
+            deleteIngredientNameInput.value = "";
+            getIngredients();
+        } else {
+            // If the response is not successful
+            console.error('Error fetching data:', response.status, response.statusText);
+            alert("Deleting Ingredient Failed");
+            return;
+        }
+    } catch (error) {
+        // Handle network or other errors
+        console.error('Error:', error);
+        alert("Deleting Ingredient Failed");
+        return;
+    }
+
 }
 
 
@@ -86,4 +213,14 @@ async function deleteIngredient() {
  */
 function refreshIngredientList() {
     // Implement ingredient list rendering logic here
+    ingredientListContainer.innerHTML = "";
+    for (let index = 0; index < ingredientList.length; index++) {
+        const ingredient = ingredientList[index].name;
+        let li = document.createElement('li');
+        let p = document.createElement('p');
+        p.innerHTML = ingredient;
+        li.appendChild(p);
+        ingredientListContainer.appendChild(li);
+    }
+
 }
