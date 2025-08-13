@@ -104,6 +104,39 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function deleteRecipe() {
         // Implement delete logic here
+        let name = document.getElementById("delete-recipe-name-input").value.trim();
+        if (!name) {
+            alert("Please enter a recipe name.");
+            return;
+        }
+
+        let token = sessionStorage.getItem("auth-token");
+        try {
+            let recipesRes = await fetch(`${BASE_URL}/recipes`);
+            let recipes = await recipesRes.json();
+            let recipe = recipes.find(r => r.name.toLowerCase() === name.toLowerCase());
+            if (!recipe) {
+                alert("Recipe not found!");
+                return;
+            }
+
+            let res = await fetch(`${BASE_URL}/recipes/${recipe.id}`, {
+                method: "DELETE",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (res.status === 200) {
+                alert("Recipe deleted successfully.");
+                getRecipes();
+            } else if (res.status === 403) {
+                alert("You are not authorized!");
+            } else {
+                alert("Error deleting recipe.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Error deleting recipe.");
+        }
     }
 
     /**
