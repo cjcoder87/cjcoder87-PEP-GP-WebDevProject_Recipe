@@ -167,7 +167,6 @@ async function deleteIngredient() {
         alert("There is no ingredient by that name");
         return;
     }
-    console.log("item " + item);
     let id = item.id;
 
     // create request 
@@ -179,7 +178,7 @@ async function deleteIngredient() {
         const response = await fetch(deleteIngredientRequest);
 
         // Check if the request was successful
-        if (response.status === 200) {
+        if (response.ok) {
             // If the response is successful (status code 200)
             //   const data = await response.json(); // Parse the response body as JSON
             //   console.log('Fetched data:', data);
