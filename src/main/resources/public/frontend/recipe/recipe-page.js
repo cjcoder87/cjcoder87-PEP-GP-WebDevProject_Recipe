@@ -69,6 +69,34 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     async function searchRecipes(term) {
         // Implement search logic here
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("auth-token")
+            }
+        };
+        let endURL = `recipes?name=${encodeURIComponent(term)}`;
+        const getRecipeRequest = new Request(`${BASE_URL}/${endURL}`, requestOptions);
+
+        try {
+            const response = await fetch(getRecipeRequest);
+
+            // Check if the request was successful
+            if (response.ok) {
+                recipeList = await response.json();
+                refreshRecipeList();
+            } else {
+                // If the response is not successful
+                console.error('Error fetching data:', response.status, response.statusText);
+                alert("Error searching recipes: " + err.message);
+                return;
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error('Error:', error);
+            alert("Error searching recipes: " + err.message);
+            return;
+        }
     }
 
     /**
