@@ -215,7 +215,6 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function refreshRecipeList() {
         // Implement refresh logic here
-        recipeList = [];
         recipeContainer.innerHTML = "";
         for (let index = 0; index < recipeList.length; index++) {
             const recipe = recipeList[index].name + recipeList[index].instructions;
