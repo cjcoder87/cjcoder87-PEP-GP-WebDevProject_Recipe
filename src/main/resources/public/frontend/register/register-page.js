@@ -1,8 +1,8 @@
 /**
  * This script defines the registration functionality for the Registration page in the Recipe Management Application.
  */
-// import { BASE_URL } from "../config/config.js";
-const BASE_URL = "http://localhost:8081"; // backend URL
+import { BASE_URL } from "../config/config.js";
+// const BASE_URL = "http://localhost:8081"; // backend URL
 
 /* 
  * TODO: Get references to various DOM elements
