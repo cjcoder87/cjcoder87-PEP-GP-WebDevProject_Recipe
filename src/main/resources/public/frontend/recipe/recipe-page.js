@@ -67,22 +67,7 @@ window.addEventListener("DOMContentLoaded", () => {
    *
    *
    */
-
-//   async function getRecipes(term) {
-//     // Clear the array in memory
-//     recipes.length = 0;
-
-//     const response = await fetch(`${BASE_URL}/recipes?term=${term}`);
-//     if (response.ok) {
-//       const data = await response.json();
-
-//       // Push all fetched recipes into the array
-//       recipes.push(...data);
-
-//       // Refresh UI
-//       refreshRecipeList();
-//     }
-//   }
+  
   async function searchRecipes() {
     // Implement search logic here
     const term = document.getElementById("search-input").value.trim();
