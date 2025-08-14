@@ -71,7 +71,6 @@ async function addIngredient() {
     // let promise = fetch(addIngredientRequest);
     try {
         const response = await fetch(addIngredientRequest);
-
         // Check if the request was successful
         if (response.ok) {
             // If the response is successful (status code 200)
