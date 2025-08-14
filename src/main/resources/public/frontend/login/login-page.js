@@ -90,6 +90,7 @@ async function processLogin() {
 
       // TODO: Optionally show the logout button if applicable
 
+      
       let responseText = await loginResponse.text();
       let sessionStorageArray = responseText.split(" ");
       sessionStorage.setItem("auth-token", sessionStorageArray[0]);
