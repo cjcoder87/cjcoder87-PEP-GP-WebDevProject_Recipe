@@ -218,7 +218,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (res.status === 200) {
         getRecipes();
-      } else if (res.status === 403) {
+      } else if (res.status === 401) {
         alert("You are not authorized!");
       } else {
         alert("Error deleting recipe.");
