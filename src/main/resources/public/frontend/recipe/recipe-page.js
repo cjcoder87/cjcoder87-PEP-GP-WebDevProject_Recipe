@@ -123,9 +123,9 @@ window.addEventListener("DOMContentLoaded", () => {
   async function addRecipe() {
     // Implement add logic here
 
-    const name = document.getElementById("add-recipe-name").value.trim();
+    const name = document.getElementById("add-recipe-name-input").value.trim();
     const instructions = document
-      .getElementById("add-recipe-instructions")
+      .getElementById("add-recipe-instructions-input")
       .value.trim();
 
     if (!name || !instructions) {
