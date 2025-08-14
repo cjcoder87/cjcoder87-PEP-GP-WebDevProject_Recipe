@@ -152,8 +152,8 @@ window.addEventListener("DOMContentLoaded", () => {
       // Check if the request was successful
       if (response.ok) {
         // If the response is successful (status code 200)
-        document.getElementById("add-recipe-name").value = "";
-        document.getElementById("add-recipe-instructions").value = "";
+        document.getElementById("add-recipe-name-input").value = "";
+        document.getElementById("add-recipe-instructions-input").value = "";
         await getRecipes();
       } else {
         // If the response is not successful
@@ -182,7 +182,42 @@ window.addEventListener("DOMContentLoaded", () => {
    */
   async function updateRecipe() {
     // Implement update logic here
-    return null;
+    const name = document.getElementById("update-recipe-name-input").value.trim();
+    const instructions = document.getElementById("update-recipe-instructions-input").value.trim();
+
+    if (!name || !instructions) {
+        alert("Please enter both a recipe name and updated instructions.");
+        return;
+    }
+
+    try {
+        const token = sessionStorage.getItem("auth-token");
+
+        // Find the recipe by name
+        const existing = recipeList.find(r => r.name.toLowerCase() === name.toLowerCase());
+        if (!existing) {
+            alert("Recipe not found.");
+            return;
+        }
+
+        const response = await fetch(`/recipes/${existing.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ name, instructions })
+        });
+
+        if (!response.ok) throw new Error(`Update failed: ${response.status}`);
+
+        document.getElementById("update-recipe-name-input").value = "";
+        document.getElementById("update-recipe-instructions-input").value = "";
+
+        await getRecipes();
+    } catch (err) {
+        alert("Error updating recipe:");
+    }
   }
 
   /**
