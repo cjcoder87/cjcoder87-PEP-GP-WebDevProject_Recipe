@@ -2,7 +2,7 @@
  * This script handles the login functionality for the Recipe Management Application.
  * It manages user authentication by sending login requests to the server and handling responses.
  */
-import { BASE_URL } from "../config/config.js";
+const BASE_URL = "http://localhost:8081"; // backend URL
 
 /*
  * TODO: Get references to DOM elements
@@ -90,7 +90,7 @@ async function processLogin() {
 
       // TODO: Optionally show the logout button if applicable
 
-      
+
       let responseText = await loginResponse.text();
       let sessionStorageArray = responseText.split(" ");
       sessionStorage.setItem("auth-token", sessionStorageArray[0]);

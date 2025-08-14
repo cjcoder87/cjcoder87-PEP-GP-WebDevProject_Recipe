@@ -1,7 +1,7 @@
 /**
  * This script defines the CRUD operations for Recipe objects in the Recipe Management Application.
  */
-import { BASE_URL } from "../config/config.js";
+const BASE_URL = "http://localhost:8081"; // backend URL
 
 let recipes = [];
 
