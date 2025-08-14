@@ -260,7 +260,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Implement refresh logic here
         recipeList.innerHTML = "";
         for (let index = 0; index < recipes.length; index++) {
-            const recipe = `${recipes[index].name}: ${recipes[index].instructions}`;
+            const recipe = `${recipes[index].name} ${recipes[index].instructions}`;
             let li = document.createElement('li');
             li.innerText = recipe;
             recipeList.appendChild(li);
