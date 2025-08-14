@@ -104,7 +104,7 @@ async function addIngredient() {
  */
 async function getIngredients() {
     // Implement get ingredients logic here
-
+    ingredients.length = 0;
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -119,7 +119,8 @@ async function getIngredients() {
 
         // Check if the request was successful
         if (response.ok) {
-            ingredients = await response.json();
+            let data = await response.json();
+            ingredients.push(...data);
             refreshIngredientList();
         } else {
             // If the response is not successful
@@ -164,12 +165,12 @@ async function deleteIngredient() {
     };
 
     let item = ingredients.find(i => i.name.toLowerCase() === ingredient.toLowerCase());
-      console.log(item);
+    console.log(item);
     if (!item?.id) {
         alert("There is no ingredient by that name");
         return;
     }
-  
+
     let id = item.id;
 
     // create request 
