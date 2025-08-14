@@ -194,20 +194,21 @@ window.addEventListener("DOMContentLoaded", () => {
         const token = sessionStorage.getItem("auth-token");
 
         // Find the recipe by name
-        const existing = recipeList.find(r => r.name.toLowerCase() === name.toLowerCase());
+        const existing = recipes.find(r => r.name.toLowerCase() === name.toLowerCase());
         if (!existing) {
             alert("Recipe not found.");
             return;
         }
 
-        const response = await fetch(`/recipes/${existing.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({ name, instructions })
-        });
+          const requestOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("auth-token"),
+      },
+      body: JSON.stringify({ name, instructions }),
+    };
+
+        const response = await fetch(`/recipes/${existing.id}`, requestOptions);
 
         if (!response.ok) throw new Error(`Update failed: ${response.status}`);
 
