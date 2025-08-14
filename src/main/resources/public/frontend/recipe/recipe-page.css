@@ -11,35 +11,124 @@
 
  */
 
- body, h1, h2, ul, li, p, input, textarea, a {
-    margin: 2px;
-    margin-left: 50px;
-    padding: 0;
-}
-
-
+/* Base Styles */
 body {
-    margin: 2px;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-    font-size: 16px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
 }
 
+/* Headings */
 h1 {
-    margin-bottom: 20px;
+  margin-bottom: 25px;
 }
-
 h2 {
-    margin-top: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
 }
 
-textarea, input {
-    width: 30%;
-    min-width: 200px;
+/* Sections */
+section,
+div.section, header {
+  background-color: white;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Labels */
+label {
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Inputs and Textareas */
+input[type="text"],
 textarea {
-    height: 50px;
+  width: 100%;
+  min-width: 200px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
 }
+textarea {
+  height: 50px;
+}
+
+/* Buttons */
+button {
+  padding: 10px;
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+button:hover {
+  background-color: #45a049;
+}
+#recipe-list-section {
+  display: flex;
+  justify-content: center;
+}
+/* Recipe List */
+#recipe-list {
+  list-style-type: circle;
+  margin-left: 20px;
+  padding-left: 0;
+  width: 90%;
+  text-align: left;
+}
+
+#admin-link {
+  color: #2196f3;
+}
+
+/* Hidden Admin Link and Logout Button */
+#admin-link,
+#logout-button {
+  display: none;
+  margin-bottom: 15px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+}
+#admin-link:hover,
+#logout-button:hover {
+  text-decoration: underline;
+}
+#delete-recipe-submit-button{
+    background-color: red;
+}
+
+#update-recipe-submit-button{
+    background-color: rgb(6, 117, 154);
+}
+
+#add-recipe-submit-button{
+    background-color: rgb(145, 94, 197);
+}
+
+#search-button{
+    background-color: rgb(185, 143, 64);
+}
+
+

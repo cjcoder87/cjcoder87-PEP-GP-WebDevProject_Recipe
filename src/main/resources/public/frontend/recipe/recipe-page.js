@@ -2,7 +2,7 @@
  * This script defines the CRUD operations for Recipe objects in the Recipe Management Application.
  */
 
-const BASE_URL = "http://localhost:8081"; // backend URL
+"http://localhost:8081"; // backend URL
 
 let recipes = [];
 
@@ -17,12 +17,23 @@ window.addEventListener("DOMContentLoaded", () => {
    */
   let adminLink = document.getElementById("admin-link");
   let recipeList = document.getElementById("recipe-list");
+  let searchButton = document.getElementById("search-button");
 
   let logoutButton = document.getElementById("logout-button");
-  let deleteButton = document.getElementById("delete-recipe-submit-input");
-  let updateButton = document.getElementById("update-recipe-submit-input");
-  let searchButton = document.getElementById("search-button");
-  let addButton = document.getElementById("add-recipe-submit-input");
+  let deleteButton = document.getElementById("delete-recipe-submit-button");
+  let updateButton = document.getElementById("update-recipe-submit-button");
+  let addButton = document.getElementById("add-recipe-submit-button");
+
+  let deleteInput = document.getElementById("delete-recipe-submit-input");
+  let updateInput = document.getElementById("update-recipe-submit-input");
+  let updateInstructions = document.getElementById(
+    "update-recipe-instructions-input"
+  );
+  let addInput = document.getElementById("add-recipe-submit-input");
+  let addInstructions = document.getElementById(
+    "add-recipe-instructions-input"
+  );
+  let searchInput = document.getElementById("search-input");
 
   /*
    * TODO: Show logout button if auth-token exists in sessionStorage
@@ -98,6 +109,7 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log(data);
         recipes.push(...data);
         refreshRecipeList();
+        searchInput.innerHTML = "";
       } else {
         console.error(
           "Error fetching data:",
@@ -123,9 +135,8 @@ window.addEventListener("DOMContentLoaded", () => {
   async function addRecipe() {
     // Implement add logic here
 
-    const name = document.getElementById("add-recipe-name-input").value.trim();
-    const instructions = document
-      .getElementById("add-recipe-instructions-input")
+    const name = addInput.value.trim();
+    const instructions = addInstructions
       .value.trim();
 
     if (!name || !instructions) {
@@ -152,8 +163,8 @@ window.addEventListener("DOMContentLoaded", () => {
       // Check if the request was successful
       if (response.ok) {
         // If the response is successful (status code 200)
-        document.getElementById("add-recipe-name-input").value = "";
-        document.getElementById("add-recipe-instructions-input").value = "";
+        addInput.innerHTML = "";
+        addInstructions.innerHTML = "";
         await getRecipes();
       } else {
         // If the response is not successful
@@ -182,8 +193,8 @@ window.addEventListener("DOMContentLoaded", () => {
    */
   async function updateRecipe() {
     // Implement update logic here
-    let name = document.getElementById("update-recipe-name-input").value.trim();
-    let instructions = document.getElementById("update-recipe-instructions-input").value.trim();
+    let name = updateInput.value.trim();
+    let instructions = updateInstructions.value.trim();
     if (!name || !instructions) {
       alert("Please enter both name and instructions.");
       return;
@@ -193,10 +204,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Fetch current recipes to get the recipe ID
     let recipesRes = await fetch(`${BASE_URL}/recipes`, {
-      headers: { "Authorization": `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
     let recipesData = await recipesRes.json();
-    let recipe = recipesData.find(r => r.name.toLowerCase() === name.toLowerCase());
+    let recipe = recipesData.find(
+      (r) => r.name.toLowerCase() === name.toLowerCase()
+    );
 
     if (!recipe) {
       alert("Recipe not found!");
@@ -204,19 +217,21 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // Send PUT request
-    let res = await fetch(`${BASE_URL}/recipes/${recipe.id}`, {
+    let response = await fetch(`${BASE_URL}/recipes/${recipe.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ name, instructions })
+      body: JSON.stringify({ name, instructions }),
     });
 
-    if (res.ok) {
+    if (response.ok) {
+      updateInput.innerHTML = "";
+      updateInstructions.innerHTML = ""
       // Update the recipes array with latest from backend
       let updatedRes = await fetch(`${BASE_URL}/recipes`, {
-        headers: { "Authorization": `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
       recipes = await updatedRes.json();
       refreshRecipeList();
@@ -234,7 +249,7 @@ window.addEventListener("DOMContentLoaded", () => {
    */
   async function deleteRecipe() {
     // Implement delete logic here
-    let name = document.getElementById("delete-recipe-name-input").value.trim();
+    let name = deleteInput.value.trim();
     if (!name) {
       alert("Please enter a recipe name.");
       return;
@@ -258,6 +273,7 @@ window.addEventListener("DOMContentLoaded", () => {
       });
 
       if (res.status === 200) {
+
         getRecipes();
       } else if (res.status === 401) {
         alert("You are not authorized!");

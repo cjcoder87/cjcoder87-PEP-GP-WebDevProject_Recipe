@@ -2,7 +2,7 @@
  * This script defines the add, view, and delete operations for Ingredient objects in the Recipe Management Application.
  */
 
-const BASE_URL = "http://localhost:8081"; // backend URL
+"http://localhost:8081"; // backend URL
 
 
 /* 

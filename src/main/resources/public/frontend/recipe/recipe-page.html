@@ -5,23 +5,27 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipes - Recipe Management App</title>
-    <link rel="stylesheet" href="recipe-page.css">
-</head>
+    <link rel="stylesheet" href="recipe-page.css" />
+  </head>
 
-<body>
-
+  <body>
     <!-- TODO: Add a hidden link with id="admin-link" to navigate to the ingredients page (admin only) -->
-    <a id="admin-link" href="../ingredients/ingredient-page.html" style="display: none;">Manage Ingredients</a>
-    <!-- TODO: Add a hidden Logout button with id="logout-button" -->
-    <button id="logout-button" style="display: none;">Log Out</button>
+    <header id="header">
+      <a
+        id="admin-link"
+        href="../ingredients/ingredient-page.html"
+        style="display: none"
+        >Manage Ingredients</a
+      >
+      <!-- TODO: Add a hidden Logout button with id="logout-button" -->
+      <button id="logout-button" style="display: none">Log Out</button>
+    </header>
     <!-- TODO: Add an h1 heading for the Recipe Management section -->
     <h1>Management of Recipes</h1>
-
     <!-- 🔍 Search a Recipe -->
     <!-- 
         TODO: 
@@ -29,20 +33,26 @@
         - Add input with id="search-input"
         - Add button with id="search-button" and text "Search"
     -->
-    <h2>Search a Recipe</h2>
-    <label for="search-input">Search Input</label>
-    <input id="search-input" type="text">
-    <button id="search-button">Search</button>
+    <section id="search-recipe-section">
+      <h2>Search a Recipe</h2>
+      <label for="search-input">Recipe Name</label>
+      <input
+        placeholder="Search for a recipe name"
+        id="search-input"
+        type="text"
+      />
+      <button id="search-button">Search</button>
+    </section>
 
-    
     <!-- 📋 Recipe List -->
     <!-- 
         TODO: 
         - Create a <ul> to hold all recipes
         - Give it id="recipe-list"
     -->
-    <ul id="recipe-list"></ul>
-
+    <section id="recipe-list-section">
+      <ul id="recipe-list"></ul>
+    </section>
     <!-- ➕ Add a Recipe -->
     <!-- 
         TODO: 
@@ -51,11 +61,22 @@
         - Textarea for instructions (id="add-recipe-instructions-input")
         - Button to submit (id="add-recipe-submit-input") with text "Add Recipe"
     -->
-    <h2>Add a Recipe</h2>
-    <label for="add-recipe-name-input">Add Recipe Input</label>
-    <input id="add-recipe-name-input" type="text">
-    <textarea name="add-recipe-instructions-input" id="add-recipe-instructions-input"></textarea>
-    <button id="add-recipe-submit-input">Add Recipe</button>
+    <section id="add-recipe-name-section">
+      <h2>Add a Recipe</h2>
+      <label for="add-recipe-name-input">Add Recipe Name</label>
+      <input
+        placeholder="Add a recipe by name"
+        id="add-recipe-name-input"
+        type="text"
+      />
+      <label for="add-recipe-instructions-input">Add Recipe Instructions</label>
+      <textarea
+        name="add-recipe-instructions-input"
+        id="add-recipe-instructions-input"
+        placeholder="Add instructions for recipe"
+      ></textarea>
+      <button id="add-recipe-submit-button">Add Recipe</button>
+    </section>
     <!-- ✏️ Update a Recipe -->
     <!-- 
         TODO:
@@ -64,12 +85,23 @@
         - Textarea for updated instructions (id="update-recipe-instructions-input")
         - Button (id="update-recipe-submit-input") with text "Update Recipe"
     -->
-    <h2>Update a Recipe</h2>
-    <label for="update-recipe-name-input">Update Recipe Input</label>
-    <input id="update-recipe-name-input" type="text">
-    <textarea name="update-recipe-instructions-input" id="update-recipe-instructions-input"></textarea>
-    <button id="update-recipe-submit-input">Update Recipe</button>
-
+    <section id="update-recipe-name-section">
+      <h2>Update a Recipe</h2>
+      <label for="update-recipe-name-input">Update Recipe Name</label>
+      <input
+        placeholder="Update existing recipe by name"
+        id="update-recipe-name-input"
+        type="text"
+      />
+      <label for="update-recipe-instructions-input"
+        >Update Recipe Instructions</label
+      >
+      <textarea
+        name="update-recipe-instructions-input"
+        id="update-recipe-instructions-input"
+      ></textarea>
+      <button id="update-recipe-submit-button">Update Recipe</button>
+    </section>
     <!-- ❌ Delete a Recipe -->
     <!-- 
         TODO:
@@ -77,12 +109,16 @@
         - Input with id="delete-recipe-name-input"
         - Button with id="delete-recipe-submit-input" and text "Delete Recipe"
     -->
-    <h2>Delete a Recipe</h2>
-    <label for="delete-recipe-name-input">Delete Recipe Input</label>
-    <input id="delete-recipe-name-input" type="text">
-    <button id="delete-recipe-submit-input">Delete Recipe</button>
-
+    <section id="delete-recipe-name-section">
+      <h2>Delete a Recipe</h2>
+      <label for="delete-recipe-name-input">Delete Recipe Name</label>
+      <input
+        placeholder="Delete a recipe by name"
+        id="delete-recipe-name-input"
+        type="text"
+      />
+      <button id="delete-recipe-submit-button">Delete Recipe</button>
+    </section>
     <script src="recipe-page.js"></script>
-</body>
-
+  </body>
 </html>

@@ -2,7 +2,7 @@
  * This script handles the login functionality for the Recipe Management Application.
  * It manages user authentication by sending login requests to the server and handling responses.
  */
-const BASE_URL = "http://localhost:8081"; // backend URL
+"http://localhost:8081"; // backend URL
 let isUser = sessionStorage.getItem("auth-token");
 
 /*
