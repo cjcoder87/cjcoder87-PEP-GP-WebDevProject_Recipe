@@ -1,8 +1,8 @@
 /**
  * This script defines the add, view, and delete operations for Ingredient objects in the Recipe Management Application.
  */
-
-const BASE_URL = "http://localhost:8081"; // backend URL
+import { BASE_URL } from "../config/config.js";
+// const BASE_URL = "http://localhost:8080"; // backend URL
 
 
 /* 
@@ -16,7 +16,6 @@ const BASE_URL = "http://localhost:8081"; // backend URL
 let addIngredientNameInput = document.getElementById("add-ingredient-name-input");
 let deleteIngredientNameInput = document.getElementById("delete-ingredient-name-input");
 let ingredientListContainer = document.getElementById("ingredient-list");
-// let searchInput = document.getElementById();
 let deleteIngredientButton = document.getElementById("delete-ingredient-submit-button");
 let addIngredientButton = document.getElementById("add-ingredient-submit-button");
 

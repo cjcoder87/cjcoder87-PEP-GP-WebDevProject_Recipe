@@ -80,3 +80,11 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+#delete-ingredient-submit-button{
+    background-color: red;
+}
+
+#add-ingredient-submit-button{
+    background-color: rgb(53 183 172);
+}

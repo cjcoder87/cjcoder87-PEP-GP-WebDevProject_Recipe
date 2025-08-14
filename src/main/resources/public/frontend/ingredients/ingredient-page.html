@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingredients - Recipe Management App</title>
     <link rel="stylesheet" href="ingredient-page.css">
 </head>
+
 <body>
-  <!-- TODO: Create a link back to the recipe page with an id of "back-link" -->
+    <!-- TODO: Create a link back to the recipe page with an id of "back-link" -->
     <a id="back-link" href="../recipe/recipe-page.html">Back to Recipe Page</a>
     <!-- TODO: Create a heading for the page -->
     <h1>Ingredients Heading</h1>
@@ -24,22 +26,25 @@
         <!-- - Include an h2 titled "Add an Ingredient" -->
         <h2>Add an Ingredient</h2>
         <!-- - Include an input field with id "add-ingredient-name-input" -->
-        <input id="add-ingredient-name-input" type="text">
+        <label for="add-ingredient-name-input">Add Ingredient</label>
+        <input placeholder="Add an ingredient by name" id="add-ingredient-name-input" type="text">
         <!-- - Include a button with id "add-ingredient-submit-button" -->
         <button id="add-ingredient-submit-button">Add Ingredient</button>
         <!-- TODO: Create a section to delete an ingredient -->
     </section>
 
     <section id="deleteIngredient">
-            <!-- - Include an h2 titled "Delete an Ingredient" -->
+        <!-- - Include an h2 titled "Delete an Ingredient" -->
 
         <h2>Delete an Ingredient</h2>
-    <!-- - Include an input field with id "delete-ingredient-name-input" -->
-     <input id="delete-ingredient-name-input" type="text">
-    <!-- - Include a button with id "delete-ingredient-submit-button" -->
-     <button id="delete-ingredient-submit-button">Delete Ingredient</button>
+        <!-- - Include an input field with id "delete-ingredient-name-input" -->
+        <label for="delete-ingredient-name-input">Delete Ingredient</label>
+        <input placeholder="Delete an ingredient by name" id="delete-ingredient-name-input" type="text">
+        <!-- - Include a button with id "delete-ingredient-submit-button" -->
+        <button id="delete-ingredient-submit-button">Delete Ingredient</button>
     </section>
 
-    <script src="ingredient-page.js"></script>
+    <script type="module" src="ingredient-page.js"></script>
 </body>
+
 </html>

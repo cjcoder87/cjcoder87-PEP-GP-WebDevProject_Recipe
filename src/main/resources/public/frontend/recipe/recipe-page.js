@@ -1,8 +1,8 @@
 /**
  * This script defines the CRUD operations for Recipe objects in the Recipe Management Application.
  */
-
-const BASE_URL = "http://localhost:8081"; // backend URL
+import { BASE_URL } from "../config/config.js";
+// const BASE_URL = "http://localhost:8080"; // backend URL
 
 let recipes = [];
 
@@ -109,7 +109,7 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log(data);
         recipes.push(...data);
         refreshRecipeList();
-        searchInput.innerHTML = "";
+        searchInput.value = "";
       } else {
         console.error(
           "Error fetching data:",
