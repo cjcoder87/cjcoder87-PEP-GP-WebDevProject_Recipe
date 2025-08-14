@@ -182,42 +182,46 @@ window.addEventListener("DOMContentLoaded", () => {
    */
   async function updateRecipe() {
     // Implement update logic here
-    const name = document.getElementById("update-recipe-name-input").value.trim();
-    const instructions = document.getElementById("update-recipe-instructions-input").value.trim();
-
+    let name = document.getElementById("update-recipe-name-input").value.trim();
+    let instructions = document.getElementById("update-recipe-instructions-input").value.trim();
     if (!name || !instructions) {
-        alert("Please enter both a recipe name and updated instructions.");
-        return;
+      alert("Please enter both name and instructions.");
+      return;
     }
 
-    try {
-        const token = sessionStorage.getItem("auth-token");
+    let token = sessionStorage.getItem("auth-token");
 
-        // Find the recipe by name
-        const existing = recipes.find(r => r.name.toLowerCase() === name.toLowerCase());
-        if (!existing) {
-            alert("Recipe not found.");
-            return;
-        }
+    // Fetch current recipes to get the recipe ID
+    let recipesRes = await fetch(`${BASE_URL}/recipes`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+    let recipesData = await recipesRes.json();
+    let recipe = recipesData.find(r => r.name.toLowerCase() === name.toLowerCase());
 
-          const requestOptions = {
+    if (!recipe) {
+      alert("Recipe not found!");
+      return;
+    }
+
+    // Send PUT request
+    let res = await fetch(`${BASE_URL}/recipes/${recipe.id}`, {
       method: "PUT",
       headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("auth-token"),
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
-      body: JSON.stringify({ name, instructions }),
-    };
+      body: JSON.stringify({ name, instructions })
+    });
 
-        const response = await fetch(`/recipes/${existing.id}`, requestOptions);
-
-        if (!response.ok) throw new Error(`Update failed: ${response.status}`);
-
-        document.getElementById("update-recipe-name-input").value = "";
-        document.getElementById("update-recipe-instructions-input").value = "";
-
-        await getRecipes();
-    } catch (err) {
-        alert("Error updating recipe:");
+    if (res.ok) {
+      // Update the recipes array with latest from backend
+      let updatedRes = await fetch(`${BASE_URL}/recipes`, {
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+      recipes = await updatedRes.json();
+      refreshRecipeList();
+    } else {
+      alert("Failed to update recipe.");
     }
   }
 
