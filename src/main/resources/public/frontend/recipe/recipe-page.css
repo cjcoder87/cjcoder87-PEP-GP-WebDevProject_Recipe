@@ -115,15 +115,15 @@ button:hover {
 #logout-button:hover {
   text-decoration: underline;
 }
-#delete-recipe-submit-button{
+#delete-recipe-submit-input{
     background-color: red;
 }
 
-#update-recipe-submit-button{
+#update-recipe-submit-input{
     background-color: rgb(6, 117, 154);
 }
 
-#add-recipe-submit-button{
+#add-recipe-submit-input{
     background-color: rgb(145, 94, 197);
 }
 

@@ -20,16 +20,16 @@ window.addEventListener("DOMContentLoaded", () => {
   let searchButton = document.getElementById("search-button");
 
   let logoutButton = document.getElementById("logout-button");
-  let deleteButton = document.getElementById("delete-recipe-submit-button");
-  let updateButton = document.getElementById("update-recipe-submit-button");
-  let addButton = document.getElementById("add-recipe-submit-button");
+  let deleteButton = document.getElementById("delete-recipe-submit-input");
+  let updateButton = document.getElementById("update-recipe-submit-input");
+  let addButton = document.getElementById("add-recipe-submit-input");
 
-  let deleteInput = document.getElementById("delete-recipe-submit-input");
-  let updateInput = document.getElementById("update-recipe-submit-input");
+  let deleteInput = document.getElementById("delete-recipe-name-input");
+  let updateInput = document.getElementById("update-recipe-name-input");
   let updateInstructions = document.getElementById(
     "update-recipe-instructions-input"
   );
-  let addInput = document.getElementById("add-recipe-submit-input");
+  let addInput = document.getElementById("add-recipe-name-input");
   let addInstructions = document.getElementById(
     "add-recipe-instructions-input"
   );
