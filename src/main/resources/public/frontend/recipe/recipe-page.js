@@ -67,7 +67,7 @@ window.addEventListener("DOMContentLoaded", () => {
    *
    *
    */
-  
+
   async function searchRecipes() {
     // Implement search logic here
     const term = document.getElementById("search-input").value.trim();
@@ -84,7 +84,7 @@ window.addEventListener("DOMContentLoaded", () => {
         Authorization: "Bearer " + sessionStorage.getItem("auth-token"),
       },
     };
-    const endURL = `recipes?term=${encodeURIComponent(term)}`;
+    const endURL = `recipes?name=${encodeURIComponent(term)}`;
     const getRecipeRequest = new Request(
       `${BASE_URL}/${endURL}`,
       requestOptions
@@ -95,6 +95,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         recipes.push(...data);
         refreshRecipeList();
       } else {
