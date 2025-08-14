@@ -3,7 +3,6 @@
  * It manages user authentication by sending login requests to the server and handling responses.
  */
 import { BASE_URL } from "../config/config.js";
-// const BASE_URL = "http://localhost:8081"; // backend URL
 
 /*
  * TODO: Get references to DOM elements
