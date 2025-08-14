@@ -1,8 +1,8 @@
 /**
  * This script defines the add, view, and delete operations for Ingredient objects in the Recipe Management Application.
  */
-import { BASE_URL } from "../config/config.js";
-// const BASE_URL = "http://localhost:8080"; // backend URL
+// import { BASE_URL } from "../config/config.js";
+const BASE_URL = "http://localhost:8081"; // backend URL
 
 
 /* 
